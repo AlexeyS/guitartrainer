@@ -1,7 +1,7 @@
 #ifndef GUITAR_H
 #define GUITAR_H
 
-#include <QVector.h>
+#include <QVector>
 
 #include "sound.h"
 
