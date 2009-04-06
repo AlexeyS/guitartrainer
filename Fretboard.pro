@@ -2,7 +2,7 @@
 # Project created by QtCreator 2009-04-04T11:22:06
 # -------------------------------------------------
 QT += svg
-TARGET = Freatboard
+TARGET = Fretboard
 TEMPLATE = app
 SOURCES += main.cpp \
     guitartrainer.cpp \
@@ -15,4 +15,4 @@ HEADERS += guitartrainer.h \
     guitar.h
 FORMS += 
 OTHER_FILES += 
-RESOURCES += freatboards.qrc
+RESOURCES += fretboards.qrc

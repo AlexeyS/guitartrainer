@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/" >
+        <file>res/BassFretboard.bmp</file>
+        <file>res/GuitarFretboard.bmp</file>
+    </qresource>
+</RCC>
