@@ -6,6 +6,7 @@
 
 #include "sound.h"
 #include "fretboardwidget.h"
+#include "stavewidget.h"
 
 class GuitarTrainer : public QWidget
 {
@@ -18,6 +19,7 @@ public:
 private:
 
     FretboardWidget* _fretboard;
+    StaveWidget* _stave;
     QPushButton* _noteButtons[NOTES_COUNT];
 };
 

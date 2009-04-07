@@ -12,10 +12,9 @@ class FretboardWidget : public QWidget
 
 public:
 
-    FretboardWidget(QWidget *parent = 0);
+    FretboardWidget(QWidget* parent = 0);
 
     QSize minimumSizeHint() const;
-    QSize maximumSize() const;
 
     void setGuitar(const Guitar& guitar);
 

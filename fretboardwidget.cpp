@@ -2,18 +2,13 @@
 
 #include "fretboardwidget.h"
 
-FretboardWidget::FretboardWidget(QWidget *parent)
+FretboardWidget::FretboardWidget(QWidget* parent)
     : QWidget(parent)
 {
     _background.load(":/res/GuitarFretboard.bmp");
 }
 
 QSize FretboardWidget::minimumSizeHint() const
-{
-    return QSize(626, 86);
-}
-
-QSize FretboardWidget::maximumSize() const
 {
     return QSize(626, 86);
 }

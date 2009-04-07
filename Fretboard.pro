@@ -8,11 +8,13 @@ SOURCES += main.cpp \
     guitartrainer.cpp \
     fretboardwidget.cpp \
     sound.cpp \
-    guitar.cpp
+    guitar.cpp \
+    stavewidget.cpp
 HEADERS += guitartrainer.h \
     fretboardwidget.h \
     sound.h \
-    guitar.h
+    guitar.h \
+    stavewidget.h
 FORMS += 
 OTHER_FILES += 
 RESOURCES += fretboards.qrc
