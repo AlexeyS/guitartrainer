@@ -5,28 +5,17 @@
 
 #include "sound.h"
 
-class GuitarString
-{
-public:
-
-    GuitarString(Sound tune);
-
-    Sound getFretSound(unsigned int freat);
-
-private:
-
-    const Sound _tune;
-};
-
 class Guitar
 {
 public:
 
-    Guitar(const QVector<GuitarString*>& strings);
+    Guitar(const QVector<Sound>& tune);
+
+    bool checkFretSound(unsigned int fret, unsigned int string, Note note) const;
 
 private:
 
-    QVector<GuitarString*> _strings;
+    QVector<Sound> _tune;
 };
 
 #endif // GUITAR_H

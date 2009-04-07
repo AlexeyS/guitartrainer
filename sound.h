@@ -66,6 +66,7 @@ class Sound
 {
 public:
 
+    Sound();
     Sound(Note note, Octave octave);
 
     void next();

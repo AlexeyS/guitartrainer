@@ -6,6 +6,12 @@ Sound::Sound(Note note, Octave octave)
 {
 }
 
+Sound::Sound()
+    : _note(NOTE_FIRST)
+    , _octave(OCTAVE_FIRST)
+{
+}
+
 void Sound::next()
 {
     if (_note != NOTE_LAST)
@@ -13,7 +19,7 @@ void Sound::next()
     else if(_octave != OCTAVE_LAST)
     {
         _octave = Octave(_octave + 1);
-        _note = NOTE_C;
+        _note = NOTE_FIRST;
     }
 }
 
@@ -24,7 +30,7 @@ void Sound::prev()
     else if(_octave != OCTAVE_FIRST)
     {
         _octave = Octave(_octave - 1);
-        _note = NOTE_B;
+        _note = NOTE_LAST;
     }
 }
 
