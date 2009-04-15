@@ -18,8 +18,8 @@ enum Note
     NOTE_Gis,
     NOTE_A,
     NOTE_Ais,
-    NOTE_B,
-    NOTE_LAST = NOTE_B,
+    NOTE_H,
+    NOTE_LAST = NOTE_H,
     NOTES_COUNT
 };
 
@@ -34,7 +34,7 @@ static const QString NoteNames[NOTES_COUNT] = { "C",
                                                 "Gis",
                                                 "A",
                                                 "Ais",
-                                                "B" };
+                                                "H" };
 
 enum Octave
 {

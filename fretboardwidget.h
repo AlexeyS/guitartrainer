@@ -24,9 +24,7 @@ protected:
 
 private:
 
-    Guitar* _guitar;
-
-    QPixmap _background;
+    Guitar _guitar;
 };
 
 #endif // FRETBOARDWIDGET_H

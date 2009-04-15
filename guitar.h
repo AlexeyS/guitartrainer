@@ -9,9 +9,13 @@ class Guitar
 {
 public:
 
+    Guitar();
     Guitar(const QVector<Sound>& tune);
 
     bool checkFretSound(unsigned int fret, unsigned int string, Note note) const;
+    void getFretSound(unsigned int fret, unsigned int string, Sound& sound) const;
+
+    unsigned int getStringCount() const;
 
 private:
 
