@@ -2,5 +2,6 @@
     <qresource prefix="/" >
         <file>res/BassFretboard.bmp</file>
         <file>res/GuitarFretboard.bmp</file>
+        <file>res/wood.jpg</file>
     </qresource>
 </RCC>

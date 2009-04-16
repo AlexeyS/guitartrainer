@@ -28,13 +28,13 @@ static const QColor OctaveColors[OCTAVES_COUNT] = { Qt::red,
 
 void FretboardWidget::paintEvent(QPaintEvent * /* event */)
 {
-
-
     QPainter painter(this);
     painter.setRenderHint(QPainter::Antialiasing, true);
 
     painter.setPen(palette().dark().color());
-    painter.setBrush(QBrush(Qt::white));
+
+    QPixmap woodTexture(":/res/wood.jpg");
+    painter.setBrush(QBrush(woodTexture));
 
     QRect fretRect(0, 0, 0, 0);
     const unsigned int stringsCount =  _guitar.getStringCount();
@@ -49,11 +49,15 @@ void FretboardWidget::paintEvent(QPaintEvent * /* event */)
             fretRect.setTop(height() * j / stringsCount);
             fretRect.setBottom(height() * (j + 1) / stringsCount);
 
-            Sound sound;
-            _guitar.getFretSound(i, j, sound);
+            //Sound sound;
+            //_guitar.getFretSound(i, j, sound);
+            //painter.setBrush(OctaveColors[sound.octave()]);
 
-            painter.setBrush(OctaveColors[sound.octave()]);
             painter.drawRect(fretRect);
         }
+
+        painter.setPen(Qt::black);
+        painter.drawLine(fretRect.left(), 0, fretRect.left(), height());
+        painter.setPen(palette().dark().color());
     }
 }
