@@ -36,13 +36,28 @@ void FretboardWidget::paintEvent(QPaintEvent * /* event */)
     QPixmap woodTexture(":/res/wood.jpg");
     painter.setBrush(QBrush(woodTexture));
 
-    QRect fretRect(0, 0, 0, 0);
-    const unsigned int stringsCount =  _guitar.getStringCount();
+    const int margin = 1;
+    QRect fretboardRect(margin,
+                        margin,
+                        width() - 2 * margin,
+                        height() - 2 * margin);
+    painter.drawRect(fretboardRect);
 
+    painter.setBrush(QBrush(Qt::transparent));
+
+    const unsigned int stringsCount =  _guitar.getStringCount();
+    const int realFretWidth = width() * 4 / 3;
+    const int pointsConf[24] = { 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 2, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 2 };
+    const int pointRadius = height() / 20;
+
+    QRect fretRect(0, 0, 0, 0);
     for (unsigned int i = 0; i < 24; ++i)
     {
-        fretRect.setLeft(width() - int(width() * pow(2, - double(i) / 12)));
-        fretRect.setRight(width() - int(width() * pow(2, - double(i + 1) / 12)));
+        const int fretLeft = realFretWidth - int(realFretWidth * pow(2, - double(i) / 12));
+        const int fretRight = realFretWidth - int(realFretWidth * pow(2, - double(i + 1) / 12));
+
+        fretRect.setLeft(fretLeft);
+        fretRect.setRight(fretRight);
 
         for (unsigned int j = 0; j < stringsCount; ++j)
         {
@@ -52,12 +67,36 @@ void FretboardWidget::paintEvent(QPaintEvent * /* event */)
             //Sound sound;
             //_guitar.getFretSound(i, j, sound);
             //painter.setBrush(OctaveColors[sound.octave()]);
-
-            painter.drawRect(fretRect);
         }
 
+        // draw fret points
+        for (int j = 0; j < pointsConf[i]; ++j)
+        {
+            painter.setPen(Qt::darkGray);
+            painter.setBrush(QBrush(Qt::gray));
+
+            painter.drawEllipse(QPoint((fretRight + fretLeft) / 2,
+                                       (height() - 2 * margin) * (j + 1) / (pointsConf[i] + 1)),
+                                pointRadius,
+                                pointRadius);
+        }
+
+        // draw frets
+        painter.setPen(Qt::darkGray);
+        painter.drawLine(fretRight - 1, 0, fretRight - 1, height());
         painter.setPen(Qt::black);
-        painter.drawLine(fretRect.left(), 0, fretRect.left(), height());
-        painter.setPen(palette().dark().color());
+        painter.drawLine(fretRight, 0, fretRight, height());
+    }
+
+    // draw strings
+    for (unsigned int j = 0; j < stringsCount; ++j)
+    {
+        const int stringY = (height() - 2 * margin) * double(j + 0.5) / stringsCount;
+
+        painter.setPen(Qt::gray);
+        painter.drawLine(margin, stringY - 1, width() - 2 * margin, stringY - 1);
+
+        painter.setPen(Qt::darkGray);
+        painter.drawLine(margin, stringY, width() - 2 * margin, stringY);
     }
 }
