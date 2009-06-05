@@ -1,6 +1,6 @@
 #include <QtGui>
 
-#include "stavewidget.h"
+#include "StaveWidget.h"
 
 static const unsigned int HORIZONTAL_OFFSET = 15;
 static const unsigned int VERTICAL_OFFSET = 15;

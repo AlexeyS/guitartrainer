@@ -3,7 +3,7 @@
 
 #include <QPushButton>
 
-#include "sound.h"
+#include "Sound.h"
 
 class NoteButton : public QPushButton
 {

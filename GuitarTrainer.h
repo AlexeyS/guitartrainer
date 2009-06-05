@@ -3,9 +3,9 @@
 
 #include <QWidget>
 
-#include "sound.h"
-#include "fretboardwidget.h"
-#include "stavewidget.h"
+#include "Sound.h"
+#include "FretboardWidget.h"
+#include "StaveWidget.h"
 #include "NoteButton.h" 
 
 class GuitarTrainer : public QWidget

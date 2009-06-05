@@ -1,5 +1,5 @@
 #include <QtGui/QApplication>
-#include "guitartrainer.h"
+#include "GuitarTrainer.h"
 
 int main(int argc, char *argv[])
 {

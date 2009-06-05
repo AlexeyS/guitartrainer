@@ -4,23 +4,23 @@ find_package(Qt4 COMPONENTS QtCore QtGui QtSvg REQUIRED)
 link_directories(${QT_LIBRARY_DIR})
 include_directories(${QT_INCLUDES})
 
-set(FRETBOARD_SOURCES fretboardwidget.cpp
-                      guitar.cpp
-                      guitar.h
-                      guitartrainer.cpp
-                      main.cpp
-                      sound.cpp
-                      sound.h
-                      stavewidget.cpp)
+set(GT_SOURCES FretboardWidget.cpp
+               Guitar.cpp
+               Guitar.h
+               GuitarTrainer.cpp
+               main.cpp
+               Sound.cpp
+               Sound.h
+               StaveWidget.cpp)
 
 
-qt4_wrap_cpp(FRETBOARD_MOC fretboardwidget.h guitartrainer.h stavewidget.h NoteButton.h)
-qt4_add_resources(FRETBOARD_RES fretboards.qrc)
+qt4_wrap_cpp(GT_MOC FretboardWidget.h GuitarTrainer.h StaveWidget.h NoteButton.h)
+qt4_add_resources(GT_RES fretboards.qrc)
 
-add_executable(fretboard ${FRETBOARD_SOURCES}
-                         ${FRETBOARD_MOC}
-                         ${FRETBOARD_RES})
+add_executable(guitartrainer ${GT_SOURCES}
+                             ${GT_MOC}
+                             ${GT_RES})
 
-target_link_libraries(fretboard ${QT_QTCORE_LIBRARY}
-                                ${QT_QTGUI_LIBRARY}
-                                ${QT_QTSVG_LIBRARY})
+target_link_libraries(guitartrainer ${QT_QTCORE_LIBRARY}
+                                    ${QT_QTGUI_LIBRARY}
+                                    ${QT_QTSVG_LIBRARY})

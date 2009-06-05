@@ -1,6 +1,6 @@
 #include <QtGui>
 
-#include "fretboardwidget.h"
+#include "FretboardWidget.h"
 
 FretboardWidget::FretboardWidget(QWidget* parent)
     : QWidget(parent)

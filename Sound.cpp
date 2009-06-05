@@ -1,4 +1,4 @@
-#include "sound.h"
+#include "Sound.h"
 
 Sound::Sound(Note note, Octave octave)
     : _note(note)

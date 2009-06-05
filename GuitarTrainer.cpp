@@ -1,6 +1,6 @@
 #include <QtGui>
 
-#include "guitartrainer.h"
+#include "GuitarTrainer.h"
 
 GuitarTrainer::GuitarTrainer()
 {

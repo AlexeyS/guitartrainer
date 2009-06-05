@@ -1,4 +1,4 @@
-#include "guitar.h"
+#include "Guitar.h"
 
 Guitar::Guitar()
 {

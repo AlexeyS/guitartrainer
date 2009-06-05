@@ -5,8 +5,8 @@
 #include <QWidget>
 #include <QList>
 
-#include "guitar.h"
-#include "sound.h"
+#include "Guitar.h"
+#include "Sound.h"
 
 class FretboardWidget : public QWidget
 {

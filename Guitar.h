@@ -3,7 +3,7 @@
 
 #include <QVector>
 
-#include "sound.h"
+#include "Sound.h"
 
 class Guitar
 {
