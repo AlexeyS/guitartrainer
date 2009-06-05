@@ -7,30 +7,20 @@ GuitarTrainer::GuitarTrainer()
     _fretboard = new FretboardWidget;
     _stave = new StaveWidget;
 
-    QGridLayout* mainLayout = new QGridLayout;
-    QGridLayout* buttonsLayout = new QGridLayout;
+    QVBoxLayout* mainLayout = new QVBoxLayout(this);
+    QHBoxLayout* buttonsLayout = new QHBoxLayout();
+    setWindowTitle(tr("Guitar Trainer"));
 
-    mainLayout->setColumnStretch(0, 1);
-    mainLayout->setColumnStretch(3, 1);
-    mainLayout->setRowStretch(2, 1);
-
-    mainLayout->addWidget(_fretboard, 0, 1, Qt::AlignHCenter);
-    mainLayout->setRowMinimumHeight(1, 6);
-    mainLayout->addWidget(_stave, 2, 1, Qt::AlignCenter);
-    mainLayout->setRowMinimumHeight(3, 6);
+    mainLayout->addWidget(_fretboard, 0);
+    mainLayout->addWidget(_stave, 0);
 
     for (int i = 0; i < NOTES_COUNT; ++i)
     {
         _noteButtons[i] = new NoteButton(static_cast<Note>(i));
         connect(_noteButtons[i], SIGNAL(clicked(Note)), SLOT(noteButtonClicked(Note)));
-
-        buttonsLayout->addWidget(_noteButtons[i], 0, i, Qt::AlignCenter);
+        buttonsLayout->addWidget(_noteButtons[i], 0);
     }
-    mainLayout->addLayout(buttonsLayout, 4, 1);
-
-    setLayout(mainLayout);
-
-    setWindowTitle(tr("Guitar Trainer"));
+    mainLayout->addLayout(buttonsLayout, 0);
 }
 
 void GuitarTrainer::noteButtonClicked(Note note)

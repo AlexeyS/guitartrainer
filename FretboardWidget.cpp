@@ -5,6 +5,7 @@
 FretboardWidget::FretboardWidget(QWidget* parent)
     : QWidget(parent)
 {
+    setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 }
 
 QSize FretboardWidget::minimumSizeHint() const
@@ -27,6 +28,12 @@ static const QColor OctaveColors[OCTAVES_COUNT] = { Qt::red,
                                                     Qt::darkBlue,
                                                     Qt::magenta };
 
+int FretboardWidget::fretPosition(int fretNumber)
+{
+    const int stringLen = (width() - zeroFretPos) * 4 / 3;
+    return zeroFretPos + stringLen - stringLen * pow(2, - static_cast<double>(fretNumber) / 12);
+}
+
 void FretboardWidget::paintEvent(QPaintEvent * /* event */)
 {
     QPainter painter(this);
@@ -48,13 +55,13 @@ void FretboardWidget::paintEvent(QPaintEvent * /* event */)
 
     const unsigned int stringsCount =  _guitar.getStringCount();
     const int realFretWidth = width() * 4 / 3;
-    const int pointsConf[24] = { 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 2, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 2 };
+    static const int pointsConf[25] = { 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 2, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 2 };
     const int pointRadius = height() / 20;
 
-    for (unsigned int i = 0; i < 24; ++i)
+    for (unsigned int i = 0; i < 25; ++i)
     {
-        const int fretLeft = realFretWidth - int(realFretWidth * pow(2, - double(i) / 12));
-        const int fretRight = realFretWidth - int(realFretWidth * pow(2, - double(i + 1) / 12));
+        const int fretLeft = (i == 0) ? 0 : fretPosition(i - 1);
+        const int fretRight = fretPosition(i);
 
         // draw fret points
         for (int j = 0; j < pointsConf[i]; ++j)
@@ -69,10 +76,23 @@ void FretboardWidget::paintEvent(QPaintEvent * /* event */)
         }
 
         // draw frets
-        painter.setPen(Qt::darkGray);
-        painter.drawLine(fretRight - 1, 0, fretRight - 1, height());
-        painter.setPen(Qt::black);
-        painter.drawLine(fretRight, 0, fretRight, height());
+        if (i == 0)
+        {
+            QRect rect(fretRight - 10, 0, 10, height());
+            painter.setPen(Qt::transparent);
+            painter.setBrush(QColor(50, 50, 50));
+            painter.drawRect(rect);
+            painter.setPen(Qt::black);
+            painter.drawLine(fretRight - 10, 0, fretRight - 10, height());
+            painter.drawLine(fretRight, 0, fretRight, height());
+        }
+        else
+        {
+            painter.setPen(Qt::darkGray);
+            painter.drawLine(fretRight - 1, 0, fretRight - 1, height());
+            painter.setPen(Qt::black);
+            painter.drawLine(fretRight, 0, fretRight, height());
+        }
 
         // draw marked sounds
         for (unsigned int j = 0; j < stringsCount; ++j)
@@ -105,10 +125,10 @@ void FretboardWidget::paintEvent(QPaintEvent * /* event */)
     }
 
     // draw marked sounds
-    for (unsigned int i = 0; i < 24; ++i)
+    for (unsigned int i = 0; i < 25; ++i)
     {
-        const int fretLeft = realFretWidth - int(realFretWidth * pow(2, - double(i) / 12));
-        const int fretRight = realFretWidth - int(realFretWidth * pow(2, - double(i + 1) / 12));
+        const int fretLeft = i == 0 ? 0 : fretPosition(i - 1);
+        const int fretRight = fretPosition(i);
 
         for (unsigned int j = 0; j < stringsCount; ++j)
         {

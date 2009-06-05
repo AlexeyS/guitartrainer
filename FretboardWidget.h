@@ -33,7 +33,11 @@ protected:
 
     void paintEvent(QPaintEvent *event);
 
+    int fretPosition(int fretNumber);
+
 private:
+
+    static const int zeroFretPos = 35;
 
     Guitar _guitar;
     QList<Sound> _markedSounds;
