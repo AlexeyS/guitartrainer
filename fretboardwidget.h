@@ -3,8 +3,10 @@
 
 #include <QPixmap>
 #include <QWidget>
+#include <QList>
 
 #include "guitar.h"
+#include "sound.h"
 
 class FretboardWidget : public QWidget
 {
@@ -18,6 +20,15 @@ public:
 
     void setGuitar(const Guitar& guitar);
 
+    void toggleSound(const Sound& sound)
+    {
+        if (_markedSounds.contains(sound))
+            _markedSounds.removeOne(sound);
+        else
+            _markedSounds.append(sound);
+        repaint(rect());
+    }
+
 protected:
 
     void paintEvent(QPaintEvent *event);
@@ -25,6 +36,7 @@ protected:
 private:
 
     Guitar _guitar;
+    QList<Sound> _markedSounds;
 };
 
 #endif // FRETBOARDWIDGET_H

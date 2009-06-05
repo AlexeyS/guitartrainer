@@ -14,7 +14,7 @@ set(FRETBOARD_SOURCES fretboardwidget.cpp
                       stavewidget.cpp)
 
 
-qt4_wrap_cpp(FRETBOARD_MOC fretboardwidget.h guitartrainer.h stavewidget.h)
+qt4_wrap_cpp(FRETBOARD_MOC fretboardwidget.h guitartrainer.h stavewidget.h NoteButton.h)
 qt4_add_resources(FRETBOARD_RES fretboards.qrc)
 
 add_executable(fretboard ${FRETBOARD_SOURCES}

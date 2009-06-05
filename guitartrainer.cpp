@@ -21,7 +21,8 @@ GuitarTrainer::GuitarTrainer()
 
     for (int i = 0; i < NOTES_COUNT; ++i)
     {
-        _noteButtons[i] = new QPushButton(NoteNames[i]);
+        _noteButtons[i] = new NoteButton(static_cast<Note>(i));
+        connect(_noteButtons[i], SIGNAL(clicked(Note)), SLOT(noteButtonClicked(Note)));
 
         buttonsLayout->addWidget(_noteButtons[i], 0, i, Qt::AlignCenter);
     }
@@ -30,6 +31,11 @@ GuitarTrainer::GuitarTrainer()
     setLayout(mainLayout);
 
     setWindowTitle(tr("Guitar Trainer"));
+}
+
+void GuitarTrainer::noteButtonClicked(Note note)
+{
+    _fretboard->toggleSound(Sound(note, FIRST_OCTAVE));
 }
 
 GuitarTrainer::~GuitarTrainer()

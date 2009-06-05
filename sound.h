@@ -75,6 +75,11 @@ public:
     Note note() const;
     Octave octave() const;
 
+    bool operator==(const Sound& o)
+    {
+        return _note == o._note && _octave == o._octave;
+    }
+
 private:
 
     Note _note;
