@@ -1,25 +1,8 @@
 #include "Guitar.h"
 
-Guitar::Guitar()
+void Guitar::addString(const Sound& tune)
 {
-    // default tune for guitar
-
-    _tune.push_back(Sound(NOTE_E, FIRST_OCTAVE));
-    _tune.push_back(Sound(NOTE_H, SMALL_OCTAVE));
-    _tune.push_back(Sound(NOTE_G, SMALL_OCTAVE));
-    _tune.push_back(Sound(NOTE_D, SMALL_OCTAVE));
-    _tune.push_back(Sound(NOTE_A, LARGE_OCTAVE));
-    _tune.push_back(Sound(NOTE_E, LARGE_OCTAVE));
-
-    //_tune.push_back(Sound(NOTE_G, LARGE_OCTAVE));
-    //_tune.push_back(Sound(NOTE_D, LARGE_OCTAVE));
-    //_tune.push_back(Sound(NOTE_A, CONTR_OCTAVE));
-    //_tune.push_back(Sound(NOTE_E, CONTR_OCTAVE));
-}
-
-Guitar::Guitar(const QVector<Sound>& tune)
-    : _tune(tune)
-{
+    _tune.push_back(tune);
 }
 
 bool Guitar::checkFretSound(unsigned int fret, unsigned int string, Note note) const

@@ -16,6 +16,7 @@ QSize FretboardWidget::minimumSizeHint() const
 void FretboardWidget::setGuitar(const Guitar& guitar)
 {
     _guitar = guitar;
+    repaint(rect());
 }
 
 static const QColor OctaveColors[OCTAVES_COUNT] = { Qt::red,

@@ -24,16 +24,16 @@ enum Note
 };
 
 static const QString NoteNames[NOTES_COUNT] = { "C",
-                                                "Cis",
+                                                "C#",
                                                 "D",
-                                                "Dis",
+                                                "Eb",
                                                 "E",
                                                 "F",
-                                                "Fis",
+                                                "F#",
                                                 "G",
-                                                "Gis",
+                                                "Ab",
                                                 "A",
-                                                "Ais",
+                                                "Hb",
                                                 "H" };
 
 enum Octave

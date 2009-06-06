@@ -2,11 +2,12 @@
 #define GUITARTRAINER_H
 
 #include <QWidget>
+#include <QComboBox>
 
 #include "Sound.h"
 #include "FretboardWidget.h"
 #include "StaveWidget.h"
-#include "NoteButton.h" 
+#include "NotePanel.h" 
 
 class GuitarTrainer : public QWidget
 {
@@ -19,13 +20,17 @@ public:
 
 private slots:
 
-    void noteButtonClicked(Note note);
+    void noteSelected(Note note);
+    void guitarSelected(int index);
 
 private:
 
+    Guitar _guitars[2];
+
     FretboardWidget* _fretboard;
     StaveWidget* _stave;
-    NoteButton* _noteButtons[NOTES_COUNT];
+    NotePanel* _notePanel;
+    QComboBox* _guitarBox;
 };
 
 #endif // GUITARTRAINER_H
