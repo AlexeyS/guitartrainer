@@ -126,6 +126,7 @@ void FretboardWidget::paintEvent(QPaintEvent * /* event */)
     }
 
     // draw marked sounds
+    painter.setPen(Qt::black);
     for (unsigned int i = 0; i < 25; ++i)
     {
         const int fretLeft = i == 0 ? 0 : fretPosition(i - 1);
