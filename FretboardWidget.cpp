@@ -32,7 +32,7 @@ static const QColor OctaveColors[OCTAVES_COUNT] = { Qt::red,
 int FretboardWidget::fretPosition(int fretNumber)
 {
     const int stringLen = (width() - zeroFretPos) * 4 / 3;
-    return zeroFretPos + stringLen - stringLen * pow(2, - static_cast<double>(fretNumber) / 12);
+    return static_cast<int>(zeroFretPos + stringLen - stringLen * pow(2, - static_cast<double>(fretNumber) / 12));
 }
 
 void FretboardWidget::paintEvent(QPaintEvent * /* event */)
@@ -55,7 +55,6 @@ void FretboardWidget::paintEvent(QPaintEvent * /* event */)
     painter.setBrush(QBrush(Qt::transparent));
 
     const unsigned int stringsCount =  _guitar.getStringCount();
-    const int realFretWidth = width() * 4 / 3;
     static const int pointsConf[25] = { 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 2, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 2 };
     const int pointRadius = height() / 20;
 
@@ -98,7 +97,7 @@ void FretboardWidget::paintEvent(QPaintEvent * /* event */)
         // draw marked sounds
         for (unsigned int j = 0; j < stringsCount; ++j)
         {
-            const int stringY = (height() - 2 * margin) * double(j + 0.5) / stringsCount;
+            const int stringY = static_cast<int>((height() - 2 * margin) * double(j + 0.5) / stringsCount);
 
             Sound sound;
             _guitar.getFretSound(i, j, sound);
@@ -116,7 +115,7 @@ void FretboardWidget::paintEvent(QPaintEvent * /* event */)
     // draw strings
     for (unsigned int j = 0; j < stringsCount; ++j)
     {
-        const int stringY = (height() - 2 * margin) * double(j + 0.5) / stringsCount;
+        const int stringY = static_cast<int>((height() - 2 * margin) * double(j + 0.5) / stringsCount);
 
         painter.setPen(Qt::gray);
         painter.drawLine(margin, stringY - 1, width() - 2 * margin, stringY - 1);
@@ -126,6 +125,12 @@ void FretboardWidget::paintEvent(QPaintEvent * /* event */)
     }
 
     // draw marked sounds
+    const int marksRadius = height() / 10;
+
+    QFont font = painter.font();
+    font.setPixelSize(marksRadius * 1.1);
+    painter.setFont(font);
+
     painter.setPen(Qt::black);
     for (unsigned int i = 0; i < 25; ++i)
     {
@@ -134,7 +139,7 @@ void FretboardWidget::paintEvent(QPaintEvent * /* event */)
 
         for (unsigned int j = 0; j < stringsCount; ++j)
         {
-            const int stringY = (height() - 2 * margin) * double(j + 0.5) / stringsCount;
+            const int stringY = static_cast<int>((height() - 2 * margin) * double(j + 0.5) / stringsCount);
 
             Sound sound;
             _guitar.getFretSound(i, j, sound);
@@ -143,8 +148,13 @@ void FretboardWidget::paintEvent(QPaintEvent * /* event */)
                 painter.setBrush(OctaveColors[sound.octave()]);
                 painter.drawEllipse(QPoint((fretRight + fretLeft) / 2,
                                            stringY),
-                                    pointRadius,
-                                    pointRadius);
+                                    marksRadius,
+                                    marksRadius);
+                QRectF baundingRect((fretRight + fretLeft - marksRadius * 2) / 2,
+                                    stringY - marksRadius,
+                                    marksRadius * 2,
+                                    marksRadius * 2);
+                painter.drawText(baundingRect, Qt::AlignCenter, NoteNames[sound.note()]);
             }
         }
     }
